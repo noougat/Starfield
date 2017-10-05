@@ -1,5 +1,5 @@
 NormalParticle[] cactus = new NormalParticle[500];
-    double circ = 0;
+double circ = 0;
 void setup()
 {
   background(0);
@@ -18,10 +18,22 @@ void draw()
   {
     cactus[i].move();
     cactus[i].show();
+    cactus[0].myX = 240;
+    cactus[0].myY = 240;
+    if (cactus[i].myX > 500 || cactus[i].myX <0)
+    {
+      cactus[i].myX = 250;
+      cactus[i].myY = 250;
+    }
+    if (cactus[i].myY > 500 || cactus[i].myY < 0)
+    { 
+      cactus[i].myX = 250;
+      cactus[i].myY = 250;
+    }
   }
-      for (int i =0; i < 13; i++)
+  for (int i =0; i < 49; i++)
   {
-    circ = circ + (float)1/6;
+    circ = circ + (float)1/24;
   }
 }
 class NormalParticle
@@ -63,8 +75,8 @@ class Oddball extends NormalParticle //uses an interface
   }
   void move()
   {
-    myX = myX + 50*(Math.cos(PI*circ));
-    myY = myY + 50*(Math.sin(PI*circ));
+    myX = myX + 30*(Math.cos(PI*circ));
+    myY = myY + 30*(Math.sin(PI*circ));
   }
 }
 class Jumbo extends NormalParticle //uses inheritance
