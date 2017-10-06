@@ -1,4 +1,4 @@
-NormalParticle[] cactus = new NormalParticle[500];
+Particle[] cactus = new Particle[500];
 double circ = 0;
 void setup()
 {
@@ -7,36 +7,27 @@ void setup()
   for (int i =0; i < cactus.length; i++)
   {
     cactus[i] = new NormalParticle();
-    cactus[1] = new Jumbo();
-    cactus[0] = new Oddball();
   }
+  cactus[1] = new Jumbo();
+  cactus[0] = new Oddball();
 }
 void draw()
 {
   background(0);
+  /*fill(255);
+  ellipse(250,250,40,40);*/
   for (int i =0; i < cactus.length; i++)
   {
     cactus[i].move();
     cactus[i].show();
-    cactus[0].myX = 240;
-    cactus[0].myY = 240;
-    if (cactus[i].myX > 500 || cactus[i].myX <0)
-    {
-      cactus[i].myX = 250;
-      cactus[i].myY = 250;
-    }
-    if (cactus[i].myY > 500 || cactus[i].myY < 0)
-    { 
-      cactus[i].myX = 250;
-      cactus[i].myY = 250;
-    }
   }
   for (int i =0; i < 49; i++)
   {
     circ = circ + (float)1/24;
   }
 }
-class NormalParticle
+
+class NormalParticle implements Particle
 {
   double myX, myY, myAng, mySpeed;
   int myColor;
@@ -48,12 +39,22 @@ class NormalParticle
     mySpeed = (Math.random()*5)-2;
     myColor = color((int)(Math.random()*256), 255, (int)(Math.random()*256));
   }
-  void move()
+  public void move()
   {
     myX = myX + (Math.cos(myAng))*mySpeed;
     myY = myY + (Math.sin(myAng))*mySpeed;
+    if (myX > 500 || myX <0)
+    {
+      myX = 250;
+      myY = 250;
+    }
+    if (myY > 500 || myY < 0)
+    { 
+      myX = 250;
+      myY = 250;
+    }
   }
-  void show()
+  public void show()
   {
     fill (myColor);
     noStroke();
@@ -65,8 +66,17 @@ interface Particle
   public void move();
   public void show();
 }
-class Oddball extends NormalParticle //uses an interface
+class Oddball implements Particle //uses an interface
 {
+  double myX, myY, myAng, mySpeed;
+  int myColor;
+  {
+    myX = 235;
+    myY = 200;
+    myAng = (Math.random())*4*PI;
+    mySpeed = (Math.random()*5)-2;
+    myColor = color((int)(Math.random()*256), 255, (int)(Math.random()*256));
+  }
   void show()
   {
     fill (214, 69, 88);
@@ -75,8 +85,8 @@ class Oddball extends NormalParticle //uses an interface
   }
   void move()
   {
-    myX = myX + 30*(Math.cos(PI*circ));
-    myY = myY + 30*(Math.sin(PI*circ));
+    myX = myX + 5*(Math.cos(PI*circ));
+    myY = myY + 5*(Math.sin(PI*circ));
   }
 }
 class Jumbo extends NormalParticle //uses inheritance
