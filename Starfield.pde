@@ -68,6 +68,7 @@ class Oddball implements Particle //uses an interface
 {
   double myX, myY, myAng, mySpeed;
   int myColor;
+  Oddball()
   {
     myX = 235;
     myY = 200;
