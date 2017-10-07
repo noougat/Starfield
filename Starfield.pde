@@ -14,8 +14,6 @@ void setup()
 void draw()
 {
   background(0);
-  /*fill(255);
-  ellipse(250,250,40,40);*/
   for (int i =0; i < cactus.length; i++)
   {
     cactus[i].move();
